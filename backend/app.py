@@ -54,6 +54,10 @@ def create_app(config_class=Config):
 
 	with app.app_context():
 		db.create_all()
+		if os.environ.get("DEALORA_SEED_DEMO_DATA", "").lower() in {"1", "true", "yes"}:
+			from seed import seed_database
+
+			seed_database(app)
 
 	return app
 

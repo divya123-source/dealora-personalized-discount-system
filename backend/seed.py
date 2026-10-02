@@ -55,8 +55,8 @@ DEMO_USERS = [
 ]
 
 
-def seed_database():
-	app = create_app()
+def seed_database(app=None):
+	app = app or create_app()
 	with app.app_context():
 		missing_passwords = [
 			password_env
