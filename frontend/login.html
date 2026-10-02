@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#164c43">
+	<title>Sign in | Dealora</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+	<script type="module" src="js/auth.js"></script>
+</head>
+<body class="auth-page">
+	<div class="announcement"><span>SMART DEALS, A LITTLE MORE PERSONAL</span><a href="index.html">Back to Dealora ↗</a><button class="display-toggle display-toggle--auth" type="button" data-display-toggle aria-label="Maximize page" title="Maximize page"><span aria-hidden="true">⛶</span><span data-display-label>Maximize</span></button></div>
+	<main class="auth-layout">
+		<section class="auth-image auth-image--login"><div class="auth-image__content"><a class="brand brand--inverse" href="index.html"><span class="brand__mark">d</span><span>dealora</span></a><p class="eyebrow eyebrow--light">Smart Deals. Personalized for You.</p><h1>A good find<br>feels like <em>you.</em></h1><p>Come back to the things you love, with a little more value attached.</p></div><span class="auth-image__caption">THE DEALORA EDIT · EST. FOR YOUR EVERYDAY</span></section>
+		<section class="auth-panel"><div class="auth-panel__inner"><p class="eyebrow">Welcome back</p><h2>Good to see you.</h2><p class="auth-panel__copy">Sign in to pick up where you left off.</p><form id="login-form" class="stack-form"><label for="login-email">Email address</label><input id="login-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com"><label for="login-password">Password</label><input id="login-password" name="password" type="password" autocomplete="current-password" required placeholder="Your password"><div id="form-message" class="form-message" aria-live="polite"></div><button class="button button--dark button--wide" type="submit">Sign in <span aria-hidden="true">↗</span></button></form><p class="auth-switch">New to Dealora? <a href="register.html">Create an account</a></p><a class="back-link" href="products.html">Browse products without signing in</a></div></section>
+	</main>
+	<div id="toast-region" class="toast-region" aria-live="polite"></div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#164c43">
+	<meta name="description" content="Browse the Dealora edit of products and personalized discounts.">
+	<title>Shop the Edit | Dealora</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+	<script type="module" src="js/auth.js"></script>
+	<script type="module" src="js/products.js"></script>
+</head>
+<body>
+	<div class="announcement"><span>SMART DEALS, A LITTLE MORE PERSONAL</span><span>Thoughtful finds, better prices</span></div>
+	<header class="site-header">
+		<a class="brand" href="index.html" aria-label="Dealora home"><span class="brand__mark">d</span><span>dealora</span></a>
+		<button class="menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+		<nav class="site-nav" id="site-nav" aria-label="Main navigation"><a href="index.html">Home</a><a class="is-current" href="products.html">Products</a><a href="index.html#discounts">Discounts</a><a href="index.html#for-you">For You</a><a href="products.html?view=wishlist">Wishlist</a><a class="nav-cart" href="cart.html">Cart <span class="count-badge" data-cart-count hidden>0</span></a></nav>
+		<div class="header-actions"><button class="display-toggle" type="button" data-display-toggle aria-label="Maximize page" title="Maximize page"><span aria-hidden="true">⛶</span><span data-display-label>Maximize</span></button><div class="notification-wrap"><button class="notification-button" type="button" data-notification-toggle aria-label="Notifications">Updates <span class="count-badge" data-notification-count hidden>0</span></button><section class="notification-panel" id="notification-panel" aria-label="Notifications"></section></div><div class="header-auth" data-login-links><a class="header-account" href="account.html">Account</a><a class="button button--small button--dark" href="login.html">Sign in</a></div><div class="header-auth" data-user-links hidden><a class="header-account" href="account.html"><span data-user-name>Account</span></a><a class="header-admin" data-admin-link href="admin.html" hidden>Admin</a><button class="text-button" type="button" data-logout>Log out</button></div></div>
+	</header>
+	<main class="catalog-main">
+		<section class="page-intro page-intro--shop"><div><p class="eyebrow">Consider this your good-find list</p><h1 id="catalog-title">Shop the <em>edit.</em></h1><p id="catalog-copy">Useful things, thoughtful details, prices worth a second look.</p></div><div class="intro-note"><span class="intro-note__number">01</span><span>Picked with intention.<br>Priced with you in mind.</span></div></section>
+		<section class="catalog-toolbar" aria-label="Product search and filters"><form class="filter-form" id="product-filter-form"><label class="filter-field filter-field--search"><span>Search the edit</span><input id="product-search" name="search" type="search" placeholder="Name, brand, or feeling..."></label><label class="filter-field"><span>Category</span><select id="category-filter" name="category"><option value="">All categories</option></select></label><label class="filter-field filter-field--price"><span>Min price</span><input id="minimum-price" name="min_price" type="number" min="0" step="0.01" placeholder="$0"></label><label class="filter-field filter-field--price"><span>Max price</span><input id="maximum-price" name="max_price" type="number" min="0" step="0.01" placeholder="No limit"></label><label class="filter-field"><span>Sort by</span><select id="product-sort" name="sort"><option value="name">Name</option><option value="popular">Popular</option><option value="newest">Newest</option><option value="price_asc">Price: low to high</option><option value="price_desc">Price: high to low</option></select></label><button class="button button--dark filter-submit" type="submit">Apply filters <span aria-hidden="true">↗</span></button></form></section>
+		<section class="catalog-results"><div class="results-heading"><p id="results-summary" aria-live="polite">Loading products...</p><button class="text-button" id="clear-filters" type="button">Clear filters</button></div><div class="product-grid" id="product-grid"><div class="loading-state">Gathering the good stuff...</div></div></section>
+		<section class="product-detail" id="product-detail" hidden></section>
+	</main>
+	<footer class="site-footer"><a class="brand brand--footer" href="index.html"><span class="brand__mark">d</span><span>dealora</span></a><p>Thoughtful finds. Better prices. A little more you.</p><div class="footer-links"><a href="index.html">Home</a><a href="index.html#discounts">Today's deals</a><a href="account.html">Your account</a></div><small>© 2026 Dealora. Good things, thoughtfully found.</small></footer>
+	<div id="toast-region" class="toast-region" aria-live="polite"></div>
+</body>
+</html>
