@@ -76,6 +76,7 @@ def seed_database():
 		db.session.flush()
 
 		demo_users = [
+			# Public demo-only credentials; never reuse these for a deployed admin account.
 			("Dealora Admin", "admin@dealora.com", "***REMOVED***", "admin", 35, "Seattle", ["Electronics", "Home"]),
 			("Jordan Lee", "user@dealora.com", "***REMOVED***", "customer", 29, "Portland", ["Fashion", "Sports"]),
 			("Maya Patel", "maya@dealora.com", "***REMOVED***", "customer", 34, "Austin", ["Beauty", "Home"]),
