@@ -1,5 +1,7 @@
-// Change this value when the Flask API is hosted on another port or host.
-export const API_BASE = window.DEALORA_API_BASE || "http://127.0.0.1:5001/api";
+const localApiBase = window.location.port === "8000"
+	? `${window.location.protocol}//${window.location.hostname}:5001/api`
+	: "/api";
+export const API_BASE = window.DEALORA_API_BASE || localApiBase;
 
 const TOKEN_KEY = "dealora_token";
 const USER_KEY = "dealora_user";

@@ -1,8 +1,13 @@
-from flask import Flask, jsonify
+import os
+
+from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 
 from config import Config
 from models import db, jwt
+
+
+FRONTEND_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend"))
 
 
 def create_app(config_class=Config):
@@ -38,6 +43,14 @@ def create_app(config_class=Config):
 	@app.get("/api/health")
 	def health():
 		return jsonify({"status": "ok", "message": "Dealora API is running"})
+
+	@app.get("/")
+	def frontend_home():
+		return send_from_directory(FRONTEND_DIR, "index.html")
+
+	@app.get("/<path:filename>")
+	def frontend_file(filename):
+		return send_from_directory(FRONTEND_DIR, filename)
 
 	with app.app_context():
 		db.create_all()

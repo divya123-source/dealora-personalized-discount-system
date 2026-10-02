@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timedelta
 
 from app import create_app
@@ -45,10 +46,31 @@ PRODUCT_DATA = [
 	("Linen Table Runner", "Washed linen runner sized for everyday dining.", "Home", 45.00, 31, "Hearthline", "photo-1600210492486-724fe5c67fb0"),
 ]
 
+DEMO_USERS = [
+	("Dealora Admin", "admin@dealora.com", "DEALORA_DEMO_ADMIN_PASSWORD", "admin", 35, "Seattle", ["Electronics", "Home"]),
+	("Jordan Lee", "user@dealora.com", "DEALORA_DEMO_CUSTOMER_PASSWORD", "customer", 29, "Portland", ["Fashion", "Sports"]),
+	("Maya Patel", "maya@dealora.com", "DEALORA_DEMO_MAYA_PASSWORD", "customer", 34, "Austin", ["Beauty", "Home"]),
+	("Ethan Brooks", "ethan@dealora.com", "DEALORA_DEMO_ETHAN_PASSWORD", "customer", 26, "Denver", ["Electronics", "Sports"]),
+	("Sofia Chen", "sofia@dealora.com", "DEALORA_DEMO_SOFIA_PASSWORD", "customer", 41, "Chicago", ["Home", "Beauty"]),
+]
+
 
 def seed_database():
 	app = create_app()
 	with app.app_context():
+		missing_passwords = [
+			password_env
+			for _, email, password_env, *_ in DEMO_USERS
+			if User.query.filter_by(email=email).first() is None
+			and len(os.environ.get(password_env, "")) < 12
+		]
+		if missing_passwords:
+			raise RuntimeError(
+				"Set unique demo passwords of at least 12 characters for: {}".format(
+				", ".join(missing_passwords)
+				)
+			)
+
 		categories = {}
 		for name, description in CATEGORY_DATA:
 			category = Category.query.filter_by(name=name).first()
@@ -75,26 +97,18 @@ def seed_database():
 			products[name] = product
 		db.session.flush()
 
-		demo_users = [
-			# Public demo-only credentials; never reuse these for a deployed admin account.
-			("Dealora Admin", "admin@dealora.com", "***REMOVED***", "admin", 35, "Seattle", ["Electronics", "Home"]),
-			("Jordan Lee", "user@dealora.com", "***REMOVED***", "customer", 29, "Portland", ["Fashion", "Sports"]),
-			("Maya Patel", "maya@dealora.com", "***REMOVED***", "customer", 34, "Austin", ["Beauty", "Home"]),
-			("Ethan Brooks", "ethan@dealora.com", "***REMOVED***", "customer", 26, "Denver", ["Electronics", "Sports"]),
-			("Sofia Chen", "sofia@dealora.com", "***REMOVED***", "customer", 41, "Chicago", ["Home", "Beauty"]),
-		]
 		users = {}
-		for name, email, password, role, age, location, preferences in demo_users:
+		for name, email, password_env, role, age, location, preferences in DEMO_USERS:
 			user = User.query.filter_by(email=email).first()
 			if user is None:
 				user = User(name=name, email=email)
+				user.set_password(os.environ[password_env])
 				db.session.add(user)
 			user.name = name
 			user.role = role
 			user.age = age
 			user.location = location
 			user.preferences = preferences
-			user.set_password(password)
 			users[email] = user
 		db.session.flush()
 
@@ -202,8 +216,9 @@ def seed_database():
 					))
 		db.session.commit()
 		print("Dealora demo data is ready.")
-		print("Admin: admin@dealora.com / ***REMOVED***")
-		print("Customer: user@dealora.com / ***REMOVED***")
+		print("Demo admin email: admin@dealora.com")
+		print("Demo customer email: user@dealora.com")
+		print("Demo passwords are supplied through environment variables.")
 
 
 if __name__ == "__main__":
